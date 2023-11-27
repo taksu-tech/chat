@@ -4,7 +4,7 @@ namespace Taksu\TaksuChat;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class ChatServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
