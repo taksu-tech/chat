@@ -17,7 +17,7 @@ class ChatRoom extends Model
 
     public function newUniqueId()
     {
-        return 'cr-'.strtolower((string) Str::ulid());
+        return 'cr-' . strtolower((string) Str::ulid());
     }
 
     protected $fillable = [
