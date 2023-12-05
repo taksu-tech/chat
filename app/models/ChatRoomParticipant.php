@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Taksu\TaksuChat\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -2,11 +2,11 @@
 
 namespace Taksu\TaksuChat\Services;
 
-use App\Models\ChatMessage;
 use App\Notifications\Chat\NewChatMessageNotification;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Lorisleiva\Actions\Concerns\AsAction;
+use Taksu\TaksuChat\Models\ChatMessage;
 use Taksu\TaksuChat\Notifications\NewChat;
 
 class NotifyChatRoomParticipants
@@ -36,7 +36,7 @@ class NotifyChatRoomParticipants
         // the error will cancel all notification processing
         // * update: call the action with `dispatchAfterResponse` can deal with the above problem
         // the notification is put on the queue to prevent error messages include in http response
-        Notification::send($users, new NewChat($chatMessage));
+        // Notification::send($users, new NewChat($chatMessage)); // @todo: Disable for now due to error
 
         // alternative: loop through all user
         // seperate the valid and non valid token woth try catch
