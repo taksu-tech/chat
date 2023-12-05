@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Taksu\TaksuChat\Models\ChatMessage;
 use Taksu\TaksuChat\Models\ChatRoom;
 use Taksu\TaksuChat\Models\ChatRoomParticipant;
-use Taksu\TaksuChat\services\ParticipantHelper;
+use Taksu\TaksuChat\Services\ParticipantHelper;
 
 class ChatService
 {
@@ -126,7 +126,7 @@ class ChatService
         // the logic is if the message was created after `last_read` date time, mean user not yet read that message. vice versa
         $this->checkRoomStatus($room);
 
-        if (! $this->isInChatRoom($room, $participant)) {
+        if (!$this->isInChatRoom($room, $participant)) {
             throw new Exception('You are not a participant of this chat.', 403);
         }
 
@@ -136,7 +136,7 @@ class ChatService
             ['participant_id', '=', $participant->getId()],
         ])->first();
 
-        if (! $roomParticipant) {
+        if (!$roomParticipant) {
             throw new Exception('Participant not found');
         }
 
@@ -150,7 +150,7 @@ class ChatService
     {
         $this->checkRoomStatus($room);
 
-        if (! $this->isInChatRoom($room, $sender)) {
+        if (!$this->isInChatRoom($room, $sender)) {
             throw new Exception('You are not a participant of this chat.', 403);
         }
 
@@ -208,7 +208,7 @@ class ChatService
             ['participant_id', '=', $participantId],
         ]);
         // dd($roomParticipant->get()->toArray(), $participantId);
-        if (! $roomParticipant->exists()) {
+        if (!$roomParticipant->exists()) {
             throw new Exception('Participant not found', 400);
         }
 
