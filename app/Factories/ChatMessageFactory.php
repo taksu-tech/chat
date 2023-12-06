@@ -28,7 +28,7 @@ class ChatMessageFactory extends Factory
         return [
             'id' => (new ChatMessage)->newUniqueId(),
             'chat_room_id' => ChatRoom::factory(),
-            'sender_type' => '\App\Models\Client',
+            'sender_type' => 'App\Models\Client',
             'sender_id' => fake()->uuid(),
             'message' => fake()->sentence(10),
             'media_mime' => 'image/png',

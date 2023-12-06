@@ -28,7 +28,7 @@ class ChatRoomParticipantFactory extends Factory
         return [
             'id' => (new ChatRoomParticipant)->newUniqueId(),
             'chat_room_id' => ChatRoom::factory(),
-            'participant_type' => '\App\Models\Client',
+            'participant_type' => 'App\Models\Client',
             'participant_id' => fake()->uuid(),
             'last_read' => now(),
         ];
