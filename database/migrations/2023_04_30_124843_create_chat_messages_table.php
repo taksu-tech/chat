@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('chat_room_id', 30);
             $table->string('sender_type', 35);
-            $table->string('sender_id', 35);
+            $table->string('sender_id', 40);
             $table->text('message');
 
             $table->string('media_mime', 50)->nullable();
