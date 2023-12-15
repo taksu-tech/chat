@@ -2,13 +2,13 @@
 
 namespace Taksu\TaksuChat\Notifications;
 
-use App\Models\ChatMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\Fcm\FcmChannel;
 use NotificationChannels\Fcm\FcmMessage;
+use Taksu\TaksuChat\Models\ChatMessage;
 
 class NewChat extends Notification implements ShouldQueue
 {

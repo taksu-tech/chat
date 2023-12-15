@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('chat_room_id', 30);
             $table->string('participant_type', 35);
-            $table->string('participant_id', 35);
+            $table->string('participant_id', 40);
             $table->dateTime('last_read')->nullable();
 
             $table->timestamps();

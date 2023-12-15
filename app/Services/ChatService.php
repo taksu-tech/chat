@@ -2,14 +2,13 @@
 
 namespace Taksu\TaksuChat\Services;
 
-use App\Models\ChatMessage;
-use App\Models\ChatRoom;
-use App\Models\ChatRoomParticipant;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Taksu\TaksuChat\services\ParticipantHelper;
-use Taksu\TaksuChat\Traits\CanChat;
+use Taksu\TaksuChat\Models\ChatMessage;
+use Taksu\TaksuChat\Models\ChatRoom;
+use Taksu\TaksuChat\Models\ChatRoomParticipant;
+use Taksu\TaksuChat\Services\ParticipantHelper;
 
 class ChatService
 {
@@ -72,7 +71,7 @@ class ChatService
         return $room;
     }
 
-    public function addParticipant(ChatRoom $room, CanChat $participant)
+    public function addParticipant(ChatRoom $room, ParticipantHelper $participant)
     {
         $this->checkRoomStatus($room);
 
@@ -119,7 +118,7 @@ class ChatService
         }
     }
 
-    public function setLastTimeReading(ChatRoom $room, object $participant)
+    public function setLastTimeReading(ChatRoom $room, ParticipantHelper $participant)
     {
         // thet method to record the user last time reading the message
         // alternative to is_read column
@@ -127,15 +126,19 @@ class ChatService
         // the logic is if the message was created after `last_read` date time, mean user not yet read that message. vice versa
         $this->checkRoomStatus($room);
 
-        if (! $this->isInChatRoom($room, $participant)) {
+        if (!$this->isInChatRoom($room, $participant)) {
             throw new Exception('You are not a participant of this chat.', 403);
         }
 
         $roomParticipant = ChatRoomParticipant::where([
             ['chat_room_id', '=', $room->id],
             ['participant_type', '=', get_class($participant)],
-            ['participant_id', '=', $participant->id],
+            ['participant_id', '=', $participant->getId()],
         ])->first();
+
+        if (!$roomParticipant) {
+            throw new Exception('Participant not found');
+        }
 
         $roomParticipant->last_read = now()->toDateTimeString();
         $roomParticipant->save();
@@ -143,11 +146,11 @@ class ChatService
         return $roomParticipant->last_read;
     }
 
-    public function sendChatMessage(ChatRoom $room, CanChat $sender, array $data)
+    public function sendChatMessage(ChatRoom $room, ParticipantHelper $sender, array $data)
     {
         $this->checkRoomStatus($room);
 
-        if (! $this->isInChatRoom($room, $sender)) {
+        if (!$this->isInChatRoom($room, $sender)) {
             throw new Exception('You are not a participant of this chat.', 403);
         }
 
@@ -181,7 +184,7 @@ class ChatService
         }
     }
 
-    private function isInChatRoom(ChatRoom $room, CanChat $participant)
+    private function isInChatRoom(ChatRoom $room, ParticipantHelper $participant)
     {
         // check if given user is part of room participant
         $isInRoom = $room->participants()
@@ -205,7 +208,7 @@ class ChatService
             ['participant_id', '=', $participantId],
         ]);
         // dd($roomParticipant->get()->toArray(), $participantId);
-        if (! $roomParticipant->exists()) {
+        if (!$roomParticipant->exists()) {
             throw new Exception('Participant not found', 400);
         }
 

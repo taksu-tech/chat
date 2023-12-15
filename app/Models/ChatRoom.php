@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace Taksu\TaksuChat\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -48,5 +49,13 @@ class ChatRoom extends Model
     public function participants()
     {
         return $this->hasMany(ChatRoomParticipant::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return \Taksu\TaksuChat\Factories\ChatRoomFactory::new();
     }
 }
