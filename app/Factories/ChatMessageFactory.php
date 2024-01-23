@@ -33,8 +33,8 @@ class ChatMessageFactory extends Factory
             'message' => fake()->sentence(10),
             'media_mime' => 'image/png',
             'media_url' => 'https://placehold.co/600x400/png',
-            'created_at' => now()->subMinutes(40),
-            'updated_at' => now()->subMinutes(40),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
