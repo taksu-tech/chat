@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('chat_rooms', function (Blueprint $table) {
             $table->string('id', 30)->primary();
 
+            $table->string('type', 20);
+            $table->boolean('is_read_only');
+            $table->dateTime('archived_at')->nullable;
+
             $table->string('status', 20);
             $table->string('name', 50)->nullable();
             $table->text('description')->nullable();

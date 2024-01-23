@@ -16,6 +16,10 @@ class ChatRoom extends Model
 
     const STATUS_CLOSED = 'closed';
 
+    const TYPE_PRIVATE = 'private';
+
+    const TYPE_GROUP = 'group';
+
     public function newUniqueId()
     {
         return 'cr-'.strtolower((string) Str::ulid());
@@ -24,11 +28,16 @@ class ChatRoom extends Model
     protected $fillable = [
         'name',
         'description',
+        'type',
+        'is_read_only',
+        'archived_at',
         'last_message_at',
     ];
 
     protected $casts = [
         'last_message_at' => 'datetime:Y-m-d H:i:s',
+        'archived_at' => 'datetime:Y-m-d H:i:s',
+        'is_read_only' => 'boolean',
     ];
 
     public static function getSearchable(): array
