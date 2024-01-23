@@ -29,15 +29,11 @@ class ChatRoom extends Model
         'name',
         'description',
         'type',
-        'is_read_only',
-        'archived_at',
         'last_message_at',
     ];
 
     protected $casts = [
         'last_message_at' => 'datetime',
-        'archived_at' => 'datetime',
-        'is_read_only' => 'boolean',
     ];
 
     public static function getSearchable(): array
