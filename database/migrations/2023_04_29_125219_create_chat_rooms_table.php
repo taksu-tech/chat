@@ -19,6 +19,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->dateTime('last_message_at')->default(now());
 
+            $table->string('created_by', 30)->nullable();
+            $table->string('updated_by', 30)->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

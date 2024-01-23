@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('media_mime', 50)->nullable();
             $table->string('media_url')->nullable();
 
+            $table->string('created_by', 30)->nullable();
+            $table->string('updated_by', 30)->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });
