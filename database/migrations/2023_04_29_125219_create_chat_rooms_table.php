@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->string('type', 20);
             $table->boolean('is_read_only');
-            $table->dateTime('archived_at')->nullable;
+            $table->dateTime('archived_at')->nullable();
 
             $table->string('status', 20);
             $table->string('name', 50)->nullable();
