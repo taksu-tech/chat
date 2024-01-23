@@ -31,6 +31,10 @@ class ChatRoomFactory extends Factory
                 ChatRoom::STATUS_OPEN,
                 ChatRoom::STATUS_CLOSED,
             ]),
+            'type' => fake()->randomElement([
+                ChatRoom::TYPE_GROUP,
+                ChatRoom::TYPE_PRIVATE,
+            ]),
             'description' => fake()->sentence(10),
             'last_message_at' => now(),
         ];
