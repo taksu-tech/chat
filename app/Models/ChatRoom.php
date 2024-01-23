@@ -35,8 +35,8 @@ class ChatRoom extends Model
     ];
 
     protected $casts = [
-        'last_message_at' => 'datetime:Y-m-d H:i:s',
-        'archived_at' => 'datetime:Y-m-d H:i:s',
+        'last_message_at' => 'datetime',
+        'archived_at' => 'datetime',
         'is_read_only' => 'boolean',
     ];
 
