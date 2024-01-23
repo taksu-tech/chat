@@ -37,6 +37,7 @@ class ChatRoomFactory extends Factory
             ]),
             'description' => fake()->sentence(10),
             'last_message_at' => now(),
+            'is_read_only' => false,
         ];
     }
 }
